@@ -1,0 +1,27 @@
+
+
+@use "../util" as u;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    font-size: u.rem(16);
+    font-weight: 400;
+}
+
+.main-title {
+    font-size: u.fontSize(25, 20, 35);
+    font-weight: 600;
+}
+
+.menu-item {
+    font-size: u.fontSize(13, 16, 20);
+}

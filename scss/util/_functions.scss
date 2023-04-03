@@ -1,0 +1,25 @@
+
+
+@use "sass:math";
+
+$fontSizeIncrease: 3vw;
+
+@function responsiveUnit($px) {
+    @if (math.is-unitless($px)) {
+        @return math.div($px, 16);
+    }
+
+    @error("Input must not have a unit");
+}
+
+@function rem($px) {
+    @return responsiveUnit($px) + rem;
+}
+
+@function em($px) {
+    @return responsiveUnit($px) + em;
+}
+
+@function fontSize($min, $base, $max) {
+    @return clamp(rem($min), rem($base) + $fontSizeIncrease, rem($max))
+}
