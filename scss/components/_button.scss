@@ -1,0 +1,46 @@
+
+
+@use "../util" as u;
+
+%btn {
+    border-radius: u.em(8);
+    padding: u.em(10) u.em(15);
+    font-size: u.fontSize(10, 14, 16);
+    outline: none;
+    border: u.em(2) solid black;
+}
+
+%blackBtn {
+    @extend %btn;
+
+    background-color: black;
+    color: white;
+}
+
+%transparent {
+    background-color: none;
+}
+
+.btn {
+    @extend %btn;
+
+    &--black {
+        @extend %blackBtn;
+
+        &--transparent {
+            @extend %btn;
+            @extend %transparent;
+            
+            border: u.em(2) solid black;
+            color: black;
+        }
+    }
+}
+
+.text--white {
+    color: var(--clr-text-secondary);
+}
+
+.text--black {
+    color: var(--clr-text-primary);
+}

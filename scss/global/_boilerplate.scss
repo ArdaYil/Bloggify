@@ -5,15 +5,20 @@
 :root {
     --clr-primary: #AD8E70;
     --clr-secondary: white;
+    --clr-body: rgb(217, 217, 217);
     --clr-text-primary: rgb(10, 10, 10);
     --clr-text-secondary: var(--clr-secondary);
-    --body-padding: u.em(10);
+    --body-padding: 0.625em;
 }
 
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    background-color: var(--clr-body);
 }
 
 a {

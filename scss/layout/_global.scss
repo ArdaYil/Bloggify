@@ -1,0 +1,9 @@
+@use "../util" as u;
+
+.main {
+    margin-inline: var(--body-padding);
+}
+
+footer.footer {
+    margin-inline: var(--body-padding);
+}

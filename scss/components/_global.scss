@@ -1,6 +1,6 @@
 
 
-@use "functions" as f;
+@use "../util" as u;
 
 .main-title {
     color: var(--clr-text-secondary);

@@ -1,0 +1,15 @@
+@use "../util" as u;
+
+.nav-bar {
+    background-color: var(--clr-primary);
+    padding: u.em(20) u.em(30);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: u.em(40);
+
+    &__menu-item {
+        color: var(--clr-text-secondary);
+        font-weight: 600;
+    }
+}
