@@ -8,6 +8,7 @@
     font-size: u.fontSize(10, 14, 16);
     outline: none;
     border: u.em(2) solid black;
+    cursor: pointer;
 }
 
 %blackBtn {
@@ -18,7 +19,7 @@
 }
 
 %transparent {
-    background-color: none;
+    background-color: var(--clr-body);
 }
 
 .btn {
