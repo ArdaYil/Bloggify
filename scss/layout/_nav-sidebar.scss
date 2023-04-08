@@ -1,0 +1,55 @@
+@use "../util" as u;
+
+.nav-sidebar {
+    height: 300vh;
+    position: absolute;
+    background-color: var(--clr-primary-200);
+    left: 0;
+    top: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: space-between;
+    width: 0;
+    transition: all 200ms;
+    opacity: 0;
+    z-index: 2;
+
+    &__header {
+        display: flex;
+        padding-right: u.em(10);
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: u.em(40);
+        max-width: 0;
+
+        h1 {max-width: 0; font-size: 0}
+        img {max-width: 0;}
+    }
+
+    &__nav-item {
+        max-width: 0;
+        font-size: 0;
+        color: white;
+        font-weight: 600;
+    }
+}
+
+.nav-sidebar.open {
+    width: u.em(250);
+    padding: u.em(35) u.em(20);
+    opacity: 1;
+
+    header {
+        max-width: 100vw;
+
+        h1 {max-width: 100vw; font-size: u.em(30);}
+        img {max-width: 100vw;}
+    }
+
+    a {
+        max-width: 100vw;
+        font-size: u.em(20);
+    }
+}

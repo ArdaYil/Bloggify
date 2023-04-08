@@ -1,0 +1,8 @@
+@use "../util" as u;
+
+.image-btn {
+    &--sm {
+        width: u.em(25);
+        height: u.em(25);
+    }
+}

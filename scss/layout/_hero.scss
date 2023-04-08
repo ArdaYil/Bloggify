@@ -3,26 +3,30 @@
 .hero {
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
     gap: u.em(10);
-    padding-inline: u.em(20);
+    padding-inline: u.em(5);
     margin-inline: var(--body-padding);
 
     &__image {
-        background: url("../../public/images/Hero-Image.webp");
-        width: u.em(800);
-        height: u.em(600);
+        width: 100%;
+        height: auto;
         max-width: u.em(800);
         background-position-x: right;
         background-position-y: 40%;
         max-height: u.em(400);
         border-radius: u.em(10);
+        margin-bottom: u.em(20);
     }
 
     &__content {
-        width: 60%;
-
         &__text {
-            width: 50%;
+            margin-bottom: u.em(20);
+        }
+
+        &__btn-holder {
+            display: flex;
+            gap: u.em(20);
         }
     }
 }
