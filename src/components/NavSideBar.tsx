@@ -23,7 +23,11 @@ export default function ({ menuItems, onMenuClose, navOpen }: Props) {
       </header>
       <footer className="nav-sidebar__footer">
         {menuItems.map((menuItem) => (
-          <Link className="nav-sidebar__nav-item" to={menuItem.page}>
+          <Link
+            key={menuItem.text}
+            className="nav-sidebar__nav-item"
+            to={menuItem.page}
+          >
             {menuItem.text}
           </Link>
         ))}

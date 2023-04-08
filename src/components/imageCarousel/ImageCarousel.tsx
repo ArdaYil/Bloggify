@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import { CLIENT_RENEG_LIMIT } from "tls";
 import TouchHandler from "../TouchHandler";
 
 interface Props {
@@ -9,14 +10,19 @@ interface Props {
 export default function ({ children, className }: Props) {
   const [position, setPosition] = useState(0);
 
-  const handleLeftSwipe = () => {};
+  const handleLeftSwipe = () => {
+    console.log("Left Swipe");
+  };
 
-  const handleRightSwipe = () => {};
+  const handleRightSwipe = () => {
+    console.log("Right Swipe");
+  };
 
   return (
     <div className={className}>
       {children.map((child) => (
         <TouchHandler
+          key={child.key}
           onLeftSwipe={handleLeftSwipe}
           onRightSwipe={handleRightSwipe}
         >

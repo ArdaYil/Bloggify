@@ -9,7 +9,7 @@ export default function Menu({ menuItems }: Props) {
   return (
     <div className="nav-bar__menu">
       {menuItems.map((item) => (
-        <Link className={item.class} to={item.page}>
+        <Link key={item.text} className={item.class} to={item.page}>
           {item.text}
         </Link>
       ))}

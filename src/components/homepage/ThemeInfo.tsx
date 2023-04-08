@@ -15,9 +15,9 @@ export default function ThemeInfo() {
         as possible.
       </p>
       <ImageCarousel className="image-carousel">
-        <CarouselItem src={carouselImages.petBlog} />
-        <CarouselItem src={carouselImages.foodBlog} />
-        <CarouselItem src={carouselImages.gymBlog} />
+        <CarouselItem key="petBlog" src={carouselImages.petBlog} />
+        <CarouselItem key="foodBlog" src={carouselImages.foodBlog} />
+        <CarouselItem key="gymBlog" src={carouselImages.gymBlog} />
       </ImageCarousel>
       <ul>
         <li>Pick a niche</li>
