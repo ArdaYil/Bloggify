@@ -1,0 +1,12 @@
+@use "../util" as u;
+
+.theme-info {
+    &__main-info {
+        margin-bottom: u.em(20);
+    }
+
+    &__info-list {
+        
+    }
+}
+

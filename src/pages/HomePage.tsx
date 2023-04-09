@@ -8,9 +8,10 @@ export default function HomePage() {
       <header>
         <NavBar />
         <Hero />
-        <ThemeInfo />
       </header>
-      <main className="main"></main>
+      <main className="main">
+        <ThemeInfo />
+      </main>
       <footer></footer>
     </>
   );

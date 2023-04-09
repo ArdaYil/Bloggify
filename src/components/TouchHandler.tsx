@@ -1,10 +1,13 @@
-import React from "react";
+import React, { CSSProperties, RefObject } from "react";
 import { Fragment, ReactElement, useEffect, useRef } from "react";
 
 interface Props {
   onLeftSwipe: () => void;
   onRightSwipe: () => void;
+  style: CSSProperties;
   children: ReactElement;
+  className?: string;
+  refProp: RefObject<HTMLElement>;
 }
 
 interface TouchPosition {
@@ -19,11 +22,12 @@ export default function TouchHandler({
   children,
   onLeftSwipe,
   onRightSwipe,
+  className,
+  style,
+  refProp,
 }: Props) {
-  const childRef = useRef<HTMLElement>(null);
-
   useEffect(() => {
-    const childNode: HTMLElement | null = childRef.current;
+    const childNode: HTMLElement | null = refProp.current;
     const touchStartPos: TouchPosition = { x: 0, y: 0 };
     const touchWithinChild = (xPos: number, yPos: number): boolean => {
       if (!childNode) return false;
@@ -48,6 +52,7 @@ export default function TouchHandler({
 
       if (!touchWithinChild(clientX, clientY)) return;
       if (!canTouch) return;
+      console.log(canTouch);
 
       canTouch = false;
       touchDown = true;
@@ -84,5 +89,5 @@ export default function TouchHandler({
 
   const child = React.Children.only(children);
 
-  return React.cloneElement(child, { ref: childRef });
+  return React.cloneElement(child, { ref: refProp, style, className });
 }

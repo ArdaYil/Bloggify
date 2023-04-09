@@ -6,5 +6,13 @@
     background-color: red;
     width: 90vw;
     margin-inline: auto;
+    height: u.em(220);
     position: relative;
+    margin-bottom: u.em(20);
+
+    &__carousel-item {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
 }
