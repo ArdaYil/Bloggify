@@ -3,7 +3,6 @@
 @use "../util" as u;
 
 .image-carousel {
-    background-color: red;
     width: 90vw;
     margin-inline: auto;
     height: u.em(220);
@@ -15,5 +14,6 @@
         object-fit: cover;
         height: 100%;
         width: 100%;
+        transition: left 100ms;
     }
 }

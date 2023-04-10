@@ -18,8 +18,13 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     background-color: var(--clr-body);
+    overflow-x: hidden;
 }
 
 a {

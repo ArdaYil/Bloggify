@@ -1,5 +1,6 @@
 import React, { CSSProperties, RefObject } from "react";
 import { Fragment, ReactElement, useEffect, useRef } from "react";
+import _ from "lodash";
 
 interface Props {
   onLeftSwipe: () => void;
@@ -52,7 +53,6 @@ export default function TouchHandler({
 
       if (!touchWithinChild(clientX, clientY)) return;
       if (!canTouch) return;
-      console.log(canTouch);
 
       canTouch = false;
       touchDown = true;
@@ -63,28 +63,29 @@ export default function TouchHandler({
       touchStartPos.y = clientY;
     });
 
-    document.addEventListener("touchend", (e) => {
-      // console.log(touchDown);
-      if (touchDown == false) return;
+    document.addEventListener(
+      "touchend",
+      _.debounce((e) => {
+        if (touchDown == false) return;
 
-      touchDown = false;
+        touchDown = false;
 
-      const { clientX, clientY } = e.changedTouches[0];
-      const distance = clientX - touchStartPos.x;
-      const isLeft = distance > 0;
-      const isRight = distance < 0;
-      const horizontalDistance = Math.abs(distance);
-      // console.log(clientY, touchStartPos.y);
-      const withinVerticalMargin =
-        clientY > touchStartPos.y - verticalSwipeBoundary &&
-        clientY < touchStartPos.y + verticalSwipeBoundary;
+        const { clientX, clientY } = e.changedTouches[0];
+        const distance = clientX - touchStartPos.x;
+        const isLeft = distance > 0;
+        const isRight = distance < 0;
+        const horizontalDistance = Math.abs(distance);
+        const withinVerticalMargin =
+          clientY > touchStartPos.y - verticalSwipeBoundary &&
+          clientY < touchStartPos.y + verticalSwipeBoundary;
 
-      if (!withinVerticalMargin) return;
-      if (isLeft && horizontalDistance >= minSwipeDistance)
-        return onLeftSwipe();
-      if (isRight && horizontalDistance >= minSwipeDistance)
-        return onRightSwipe();
-    });
+        if (!withinVerticalMargin) return;
+        if (isLeft && horizontalDistance >= minSwipeDistance)
+          return onLeftSwipe();
+        if (isRight && horizontalDistance >= minSwipeDistance)
+          return onRightSwipe();
+      }, 100)
+    );
   }, []);
 
   const child = React.Children.only(children);

@@ -13,8 +13,10 @@ interface Props {
   className: string;
 }
 
+const carouselItemDistance = 10;
+
 export default function ({ children, className }: Props) {
-  const [position, setPosition] = useState(0);
+  const [position, setPosition] = useState(1);
   const carouselItemRefs = useRef<RefObject<HTMLElement>[]>([]);
 
   useEffect(() => {
@@ -25,37 +27,46 @@ export default function ({ children, className }: Props) {
 
       const { width } = carouselItem.getBoundingClientRect();
       const offset = width * factor;
+      const distance = carouselItemDistance * factor;
 
-      carouselItem.style.left = offset + "px";
+      carouselItem.style.left = offset + distance + "px";
 
       factor++;
     }
-  }, []);
+
+    //window.setInterval(handleLeftSwipe, 5000);
+  }, [position]);
 
   const handleLeftSwipe = () => {
-    console.log("Left Swipe");
+    console.log("New State Change:", position);
+    let newPosition = position - 1;
+    newPosition = newPosition < 0 ? children.length - 1 : newPosition;
+    console.log("New Position:", newPosition);
+
+    setPosition(newPosition);
   };
 
   const handleRightSwipe = () => {
-    console.log("Right Swipe");
+    let newPosition = position + 1;
+    newPosition = newPosition > children.length - 1 ? 0 : newPosition;
+
+    setPosition(newPosition);
   };
 
   const getCarouselItems = () => {
     const carouselItems: JSX.Element[] = [];
     const lastIndex = children.length - 1;
-    let factor = -1;
-
+    let refIndex = 0;
+    console.log(position);
     for (let i = position - 1; i <= position + 1; i++) {
       let index = i;
 
       if (i < 0) index = lastIndex;
       else if (i > lastIndex) index = 0;
 
-      console.log(index);
-
       const child = children[index];
       const childRef = React.createRef<HTMLElement>();
-      carouselItemRefs.current.push(childRef);
+      carouselItemRefs.current[refIndex] = childRef;
 
       carouselItems.push(
         <TouchHandler
@@ -70,15 +81,11 @@ export default function ({ children, className }: Props) {
         </TouchHandler>
       );
 
-      factor++;
+      refIndex++;
     }
 
     return carouselItems;
   };
 
-  return (
-    <div className={className}>
-      <ul>{getCarouselItems()}</ul>
-    </div>
-  );
+  return <div className={className}>{getCarouselItems()}</div>;
 }
