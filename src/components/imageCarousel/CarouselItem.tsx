@@ -8,11 +8,13 @@ interface Props {
 
 export default forwardRef(({ src, style, className }: Props, ref) => {
   return (
-    <img
-      className={className}
-      style={style}
-      src={src}
-      ref={ref as LegacyRef<HTMLImageElement>}
-    />
+    <li>
+      <img
+        className={className}
+        style={style}
+        src={src}
+        ref={ref as LegacyRef<HTMLImageElement>}
+      />
+    </li>
   );
 });

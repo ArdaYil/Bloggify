@@ -18,7 +18,18 @@ export default function ({ children, className }: Props) {
   const carouselItemRefs = useRef<RefObject<HTMLElement>[]>([]);
 
   useEffect(() => {
-    console.log(carouselItemRefs);
+    let factor = -1;
+
+    for (let { current: carouselItem } of carouselItemRefs.current) {
+      if (!carouselItem) return;
+
+      const { width } = carouselItem.getBoundingClientRect();
+      const offset = width * factor;
+
+      carouselItem.style.left = offset + "px";
+
+      factor++;
+    }
   }, []);
 
   const handleLeftSwipe = () => {
@@ -65,5 +76,9 @@ export default function ({ children, className }: Props) {
     return carouselItems;
   };
 
-  return <div className={className}>{getCarouselItems()}</div>;
+  return (
+    <div className={className}>
+      <ul>{getCarouselItems()}</ul>
+    </div>
+  );
 }
