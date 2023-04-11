@@ -9,6 +9,7 @@ interface Props {
   children: ReactElement;
   className?: string;
   refProp: RefObject<HTMLElement>;
+  dependencies: any[];
 }
 
 interface TouchPosition {
@@ -25,6 +26,7 @@ export default function TouchHandler({
   onRightSwipe,
   className,
   style,
+  dependencies,
   refProp,
 }: Props) {
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function TouchHandler({
 
     window.setInterval(() => {});
 
-    document.addEventListener("touchstart", (e) => {
+    const touchStart = (e: TouchEvent) => {
       const { clientX, clientY } = e.touches[0];
 
       if (!touchWithinChild(clientX, clientY)) return;
@@ -61,32 +63,37 @@ export default function TouchHandler({
 
       touchStartPos.x = clientX;
       touchStartPos.y = clientY;
-    });
+    };
 
-    document.addEventListener(
-      "touchend",
-      _.debounce((e) => {
-        if (touchDown == false) return;
+    const touchEnd = (e: TouchEvent) => {
+      if (touchDown == false) return;
 
-        touchDown = false;
+      touchDown = false;
 
-        const { clientX, clientY } = e.changedTouches[0];
-        const distance = clientX - touchStartPos.x;
-        const isLeft = distance > 0;
-        const isRight = distance < 0;
-        const horizontalDistance = Math.abs(distance);
-        const withinVerticalMargin =
-          clientY > touchStartPos.y - verticalSwipeBoundary &&
-          clientY < touchStartPos.y + verticalSwipeBoundary;
+      const { clientX, clientY } = e.changedTouches[0];
+      const distance = clientX - touchStartPos.x;
+      const isLeft = distance > 0;
+      const isRight = distance < 0;
+      const horizontalDistance = Math.abs(distance);
+      const withinVerticalMargin =
+        clientY > touchStartPos.y - verticalSwipeBoundary &&
+        clientY < touchStartPos.y + verticalSwipeBoundary;
 
-        if (!withinVerticalMargin) return;
-        if (isLeft && horizontalDistance >= minSwipeDistance)
-          return onLeftSwipe();
-        if (isRight && horizontalDistance >= minSwipeDistance)
-          return onRightSwipe();
-      }, 100)
-    );
-  }, []);
+      if (!withinVerticalMargin) return;
+      if (isLeft && horizontalDistance >= minSwipeDistance)
+        return onLeftSwipe();
+      if (isRight && horizontalDistance >= minSwipeDistance)
+        return onRightSwipe();
+    };
+
+    document.addEventListener("touchstart", touchStart);
+    document.addEventListener("touchend", touchEnd);
+
+    return () => {
+      document.removeEventListener("touchstart", touchStart);
+      document.removeEventListener("touchend", touchEnd);
+    };
+  }, dependencies);
 
   const child = React.Children.only(children);
 

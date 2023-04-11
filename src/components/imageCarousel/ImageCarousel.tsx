@@ -7,6 +7,7 @@ import React, {
   RefObject,
 } from "react";
 import TouchHandler from "../TouchHandler";
+import CarouselItem from "./CarouselItem";
 
 interface Props {
   children: ReactElement[];
@@ -15,12 +16,38 @@ interface Props {
 
 const carouselItemDistance = 10;
 
+enum Direction {
+  RIGHT,
+  LEFT,
+}
+
+const animationSpeed = 200;
+
 export default function ({ children, className }: Props) {
   const [position, setPosition] = useState(1);
+  const [direction, setDirection] = useState<Direction>(Direction.LEFT);
   const carouselItemRefs = useRef<RefObject<HTMLElement>[]>([]);
 
   useEffect(() => {
     let factor = -1;
+
+    if (
+      carouselItemRefs.current[1].current &&
+      carouselItemRefs.current[2].current &&
+      carouselItemRefs.current[0].current
+    ) {
+      if (direction == Direction.RIGHT) {
+        carouselItemRefs.current[1].current.style.transition = `left ${animationSpeed}ms`;
+        carouselItemRefs.current[2].current.style.transition = "";
+        carouselItemRefs.current[0].current.style.transition = `left ${animationSpeed}ms`;
+      } else if (direction == Direction.LEFT) {
+        carouselItemRefs.current[1].current.style.transition = `left ${animationSpeed}ms`;
+        carouselItemRefs.current[2].current.style.transition = `left ${animationSpeed}ms`;
+        carouselItemRefs.current[0].current.style.transition = "";
+      }
+    }
+
+    console.log(carouselItemRefs.current[1].current);
 
     for (let { current: carouselItem } of carouselItemRefs.current) {
       if (!carouselItem) return;
@@ -38,19 +65,21 @@ export default function ({ children, className }: Props) {
   }, [position]);
 
   const handleLeftSwipe = () => {
-    console.log("New State Change:", position);
+    console.log("Left");
     let newPosition = position - 1;
     newPosition = newPosition < 0 ? children.length - 1 : newPosition;
-    console.log("New Position:", newPosition);
 
     setPosition(newPosition);
+    setDirection(Direction.LEFT);
   };
 
   const handleRightSwipe = () => {
+    console.log("Right");
     let newPosition = position + 1;
     newPosition = newPosition > children.length - 1 ? 0 : newPosition;
 
     setPosition(newPosition);
+    setDirection(Direction.RIGHT);
   };
 
   const getCarouselItems = () => {
@@ -76,6 +105,7 @@ export default function ({ children, className }: Props) {
           onRightSwipe={handleRightSwipe}
           className={`${className}__carousel-item`}
           refProp={childRef}
+          dependencies={[position]}
         >
           {child}
         </TouchHandler>
