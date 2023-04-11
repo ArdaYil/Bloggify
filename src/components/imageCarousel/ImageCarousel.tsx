@@ -8,6 +8,8 @@ import React, {
 } from "react";
 import TouchHandler from "../TouchHandler";
 import CarouselItem from "./CarouselItem";
+import Direction from "../../enums/Direction";
+import Arrow from "../Arrow";
 
 interface Props {
   children: ReactElement[];
@@ -16,15 +18,10 @@ interface Props {
 
 const carouselItemDistance = 10;
 
-enum Direction {
-  RIGHT,
-  LEFT,
-}
-
 const animationSpeed = 200;
 
 export default function ({ children, className }: Props) {
-  const [position, setPosition] = useState(1);
+  const [position, setPosition] = useState(0);
   const [direction, setDirection] = useState<Direction>(Direction.LEFT);
   const carouselItemRefs = useRef<RefObject<HTMLElement>[]>([]);
 
@@ -103,7 +100,7 @@ export default function ({ children, className }: Props) {
           key={child.key}
           onLeftSwipe={handleLeftSwipe}
           onRightSwipe={handleRightSwipe}
-          className={`${className}__carousel-item`}
+          className={`${className}__carousel-item image-carousel-structure__carousel-item`}
           refProp={childRef}
           dependencies={[position]}
         >
@@ -117,5 +114,32 @@ export default function ({ children, className }: Props) {
     return carouselItems;
   };
 
-  return <div className={className}>{getCarouselItems()}</div>;
+  return (
+    <div className={`${className} image-carousel-structure`}>
+      <div className="image-carousel-structure__content-container">
+        <div className="image-carousel-structure__arrow-container">
+          <Arrow
+            className="image-carousel-structure__arrow--left"
+            direction={Direction.LEFT}
+            onClick={handleLeftSwipe}
+          />
+          <Arrow
+            className="image-carousel-structure__arrow--right"
+            onClick={handleRightSwipe}
+          />
+        </div>
+        <div className="image-carousel-structure__nav-container">
+          {children.map((_, index) => (
+            <div
+              onClick={() => setPosition(index)}
+              className={`image-carousel-structure__nav-item${
+                index === position ? "--active" : ""
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+      {getCarouselItems()}
+    </div>
+  );
 }

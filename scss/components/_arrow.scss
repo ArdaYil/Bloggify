@@ -1,0 +1,19 @@
+
+
+%arrow {
+    z-index: 2;
+    position: relative;
+}
+
+.arrow {
+    @extend %arrow;
+
+    &--left {
+        @extend %arrow;
+        rotate: 180deg;
+    }
+
+    &--right {
+        @extend %arrow;
+    }
+}

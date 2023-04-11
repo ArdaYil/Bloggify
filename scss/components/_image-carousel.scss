@@ -2,17 +2,77 @@
 
 @use "../util" as u;
 
-.image-carousel {
-    width: 90vw;
-    margin-inline: auto;
-    height: u.em(220);
+%arrow {
+    width: u.em(40);
+}
+
+%nav-item {
+    $size: 15;
+
+    width: u.em($size);
+    height: u.em($size);
+    background-color: white;
+    border-radius: 50%;
     position: relative;
-    margin-bottom: u.em(20);
-    
+    z-index: 2;
+}
+
+.image-carousel-structure {
+    position: relative;
 
     &__carousel-item {
         object-fit: cover;
         height: 100%;
         width: 100%;
     }
+
+    &__arrow-container {
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    &__content-container {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding-inline: u.em(10);
+        width: 100%;
+    }
+
+    &__arrow {
+        &--right {
+            @extend %arrow;
+        }
+
+        &--left {
+            @extend %arrow;
+        }
+    }
+
+    &__nav-container {
+        display: inline-flex;
+        gap: u.em(20);
+        padding-bottom: u.em(10);
+    }
+
+    &__nav-item {
+        @extend %nav-item;
+
+        &--active {
+            @extend %nav-item;
+            background-color: black;
+            opacity: 0.7;
+        }
+    }
+}
+
+.image-carousel {
+    width: 90vw;
+    margin-inline: auto;
+    height: u.em(220);
+    margin-bottom: u.em(20);
 }

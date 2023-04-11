@@ -7,6 +7,8 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: u.em(40);
+    z-index: 4;
+    position: relative;
 
     &__menu-item {
         color: var(--clr-text-secondary);
