@@ -4,6 +4,7 @@ import Menu from "./Menu";
 import NavButton from "./NavButton";
 import { useState } from "react";
 import NavSideBar from "./NavSideBar";
+import Title from "./Title";
 
 export default function NavBar() {
   const menuItems: MenuItemInterface[] = [
@@ -23,9 +24,7 @@ export default function NavBar() {
         navOpen={navOpen}
       />
       <NavButton onClick={handleNavOpen} />
-      <Link to="/" className="main-title">
-        Blogify
-      </Link>
+      <Title className="footer__title" />
       <Menu menuItems={menuItems} />
     </nav>
   );

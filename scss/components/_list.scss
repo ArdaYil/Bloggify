@@ -1,0 +1,20 @@
+
+
+@use "../util" as u;
+
+.list {
+    list-style: none;
+
+    &__item {
+        &::before {
+            content: "";
+            background-image: url("../../public/icons/check.png");
+            background-size: cover;
+            display: inline-block;
+            vertical-align: text-bottom;
+            width: u.em(20);
+            height: u.em(20);
+            margin-right: u.em(20);
+        }
+    }
+}

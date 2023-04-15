@@ -1,0 +1,16 @@
+
+
+@use "../util" as u;
+
+.about {
+    &__title {
+        font-weight: 600;
+        font-size: u.rem(20);
+    }
+
+    &__content-container {
+        display: flex;
+        flex-direction: column;
+        gap: u.em(20);
+    }
+}

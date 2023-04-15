@@ -6,7 +6,13 @@
     }
 
     &__info-list {
-        
+        margin-bottom: u.em(30);
+        line-height: 1.8;
+        font-size: u.fontSize(12, 14, 16)
     }
+}
+
+.image-carousel {
+    margin-bottom: u.em(30);
 }
 

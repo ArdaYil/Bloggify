@@ -2,7 +2,7 @@
 
 .nav-sidebar {
     height: 300vh;
-    position: absolute;
+    position: fixed;
     background-color: var(--clr-primary-200);
     left: 0;
     top: 0;
@@ -44,12 +44,12 @@
     header {
         max-width: 100vw;
 
-        h1 {max-width: 100vw; font-size: u.em(30);}
+        h1 {max-width: 100vw; font-size: u.rem(30);}
         img {max-width: 100vw;}
     }
 
     a {
         max-width: 100vw;
-        font-size: u.em(20);
+        font-size: u.rem(20);
     }
 }

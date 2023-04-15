@@ -1,0 +1,17 @@
+
+
+@use "../util" as u;
+
+.information {
+    margin-bottom: u.em(30);
+
+    &__title {
+        font-weight: 600;
+        font-size: u.rem(18);
+        margin-bottom: u.em(10);
+    }
+
+    &__first-paragraph, &__second-paragraph {
+        margin-bottom: u.em(10);
+    }
+}

@@ -1,5 +1,7 @@
 
 
+@use "../util" as u;
+
 %arrow {
     z-index: 2;
     position: relative;
@@ -15,5 +17,25 @@
 
     &--right {
         @extend %arrow;
+    }
+}
+
+.arrow-text {
+    position: relative;
+    color: var(--clr-accent);
+    font-weight: 600;
+
+    &::after {
+        $arrowSize: 25;
+
+        content: "";
+        width: u.em($arrowSize);
+        height: u.em($arrowSize);
+        margin-left: u.em(10);
+        vertical-align: middle;
+        background-repeat: none;
+        background-size: cover;
+        display: inline-block;
+        background-image: url("../../public/icons/red-regular-arrow.png");
     }
 }
