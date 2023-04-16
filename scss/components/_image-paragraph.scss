@@ -1,0 +1,19 @@
+
+
+@use "../util" as u;
+
+.image-paragraph {
+    margin-bottom: u.em(20);
+
+    &__title {
+        margin-bottom: u.em(5);
+    }
+
+    &__text {
+        margin-bottom: u.em(10);
+    }
+
+    &__image {
+
+    }
+}

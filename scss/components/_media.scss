@@ -1,0 +1,24 @@
+
+
+@use "../util" as u;
+
+.media {
+    margin-bottom: u.em(30);
+    margin-inline: u.em(10);
+
+    &__container {
+        display: flex;
+        gap: u.em(20);
+    }
+
+    &__icon {
+        $iconSize: 40;
+
+        width: u.em($iconSize);
+        height: u.em($iconSize);
+    }
+
+    &__title {
+        margin-bottom: u.em(10);
+    }
+}

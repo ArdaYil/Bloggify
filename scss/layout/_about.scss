@@ -3,6 +3,8 @@
 @use "../util" as u;
 
 .about {
+    margin-bottom: u.em(50);
+    
     &__title {
         font-weight: 600;
         font-size: u.rem(20);

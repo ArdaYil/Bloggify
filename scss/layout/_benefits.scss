@@ -1,5 +1,7 @@
 
 
+@use "../util" as u;
+
 .benefits {
-    
+    margin-bottom: u.em(20);
 }

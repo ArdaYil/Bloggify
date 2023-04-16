@@ -5,3 +5,8 @@
 .main-title {
     color: var(--clr-text-secondary);
 }
+
+.title {
+    font-size: u.fontSize(16, 18, 20);
+    font-weight: 600;
+}
